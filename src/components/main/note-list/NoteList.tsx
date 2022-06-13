@@ -8,10 +8,16 @@ type NoteListProps = {
 
 const NoteList = ({ data, onDelete, onEdit }: NoteListProps) => {
   const elements = data.map((item, i) => {
-    return <Note key={i} note={item} onDelete={() => onDelete(i)} onEditNote={() => onEdit(i)} />;
+    return (
+      <Note key={i} id={i} note={item} onDelete={() => onDelete(i)} onEditNote={() => onEdit(i)} />
+    );
   });
 
-  return <section className="section-notes">{elements}</section>;
+  return (
+    <section className="section-notes">
+      <ul className="notes-list">{elements}</ul>
+    </section>
+  );
 };
 
 export default NoteList;

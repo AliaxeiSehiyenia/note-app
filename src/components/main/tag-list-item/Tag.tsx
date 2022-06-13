@@ -8,14 +8,14 @@ type TagProps = {
 
 const Tag = ({ tag }: TagProps) => {
   return (
-    <div className="tag card">
+    <li className="tag card">
       <img className="hash" src={svgHash} alt="hash"></img>
       {tag}
       <button className="btn tag-btn delete-btn">
         <img src={svgDelete} alt=""></img>
         <span className="tooltiptext">delete tag</span>
       </button>
-    </div>
+    </li>
   );
 };
 

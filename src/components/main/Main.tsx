@@ -20,6 +20,7 @@ const Main = () => {
 
   const onDeleteNote = (id: number): void => {
     setData({ tags: [...tags], notes: notes.filter((item) => notes.indexOf(item) !== id) });
+    setActiveNote(null);
   };
 
   const onActiveNote = (id: number): void => {
@@ -28,6 +29,7 @@ const Main = () => {
 
   const { tags, notes } = data;
   const valueActiveNote = notes.find((item) => notes.indexOf(item) === activeNote);
+
   return (
     <main className="main">
       <div className="container main-container">

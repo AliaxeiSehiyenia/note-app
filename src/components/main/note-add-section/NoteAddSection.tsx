@@ -8,12 +8,10 @@ type NoteAddSectionProps = {
 };
 
 const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
-  const [currentNote, setCurrentNote] = useState<string>('');
+  const [currentNote, setCurrentNote] = useState<string | undefined>('');
 
   useEffect(() => {
-    if (valueActiveNote) {
-      setCurrentNote(valueActiveNote);
-    }
+    setCurrentNote(valueActiveNote);
   }, [valueActiveNote]);
 
   const onValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +19,9 @@ const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
   };
 
   const onAddNote = () => {
-    onAdd(currentNote);
+    if (currentNote) {
+      onAdd(currentNote);
+    }
     setCurrentNote('');
   };
 

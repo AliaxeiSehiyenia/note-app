@@ -78,10 +78,14 @@ body {
       }
     }
 
-    .section-tags {
+    .section-tags,
+    .tags-list {
       @extend %tplFlexFitContent;
       flex-wrap: wrap;
-      margin: 20px;
+
+      .tags-list {
+        margin: 20px;
+      }
 
       .tag {
         @extend %tplFlexCenter;
@@ -97,7 +101,8 @@ body {
       }
     }
 
-    .section-notes {
+    .section-notes,
+    .notes-list {
       @extend %tplFlexFitContent;
       flex-wrap: wrap;
       width: 100%;
@@ -183,8 +188,9 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     transition-property: box-shadow;
     transition: 0.2s;
+    border: 2px solid transparent;
 
-    &.active {
+    &:focus {
       border: 2px solid;
     }
 

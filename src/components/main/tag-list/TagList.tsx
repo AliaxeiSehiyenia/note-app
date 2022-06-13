@@ -9,7 +9,11 @@ const TagList = ({ data }: TagListProps) => {
     return <Tag key={i} tag={item} />;
   });
 
-  return <section className="section-tags">{elements}</section>;
+  return (
+    <section className="section-tags">
+      <ul className="tags-list">{elements}</ul>
+    </section>
+  );
 };
 
 export default TagList;
