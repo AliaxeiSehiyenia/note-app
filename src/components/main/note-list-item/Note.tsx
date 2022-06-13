@@ -1,7 +1,12 @@
 import svgDelete from '../../../resources/svg/delete.svg';
 import svgEdit from '../../../resources/svg/edit.svg';
 
-function Note() {
+type NoteProps = {
+  key: number;
+  note: string;
+};
+
+const Note = ({ note }: NoteProps) => {
   return (
     <div className="note card">
       <div className="note-btns-wrapper">
@@ -14,10 +19,9 @@ function Note() {
           <span className="tooltiptext">delete note</span>
         </button>
       </div>
-      Заметьте, что нам пришлось изменить и высоту элементов: flex-basis может определять как высоту
-      элементов, так и их ширину в зависимости от направления оси.
+      {note}
     </div>
   );
-}
+};
 
 export default Note;

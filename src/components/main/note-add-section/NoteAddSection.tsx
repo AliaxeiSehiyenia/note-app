@@ -2,7 +2,7 @@ import svgPlus from '../../../resources/svg/plus.svg';
 
 function NoteAddSection() {
   return (
-    <>
+    <section className="section-creating">
       <textarea
         className="section-creating-textarea"
         autoComplete="off"
@@ -12,7 +12,7 @@ function NoteAddSection() {
         <img src={svgPlus} alt="add note"></img>
         <span className="tooltiptext">Create note</span>
       </button>
-    </>
+    </section>
   );
 }
 

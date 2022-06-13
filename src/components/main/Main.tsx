@@ -1,23 +1,20 @@
 import NoteAddSection from './note-add-section/NoteAddSection';
-import Note from './note-list-item/Note';
-import Teg from './teg-list-item/Teg';
+import NoteList from './note-list/NoteList';
+import TagList from './tag-list/TagList';
+import data from '../../data.json';
 
-function Main() {
+const Main = () => {
+  const { tags, notes } = data;
+
   return (
     <main className="main">
       <div className="container main-container">
-        <section className="section-creating">
-          <NoteAddSection />
-        </section>
-        <section className="section-tegs">
-          <Teg />
-        </section>
-        <section className="section-notes">
-          <Note />
-        </section>
+        <NoteAddSection />
+        <TagList data={tags} />
+        <NoteList data={notes} />
       </div>
     </main>
   );
-}
+};
 
 export default Main;
