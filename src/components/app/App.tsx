@@ -1,6 +1,6 @@
-import { Footer } from '../footer/Footer';
-import { Header } from '../header/header';
-import { Main } from '../main/Main';
+import Footer from '../footer/Footer';
+import Header from '../header/header';
+import Main from '../main/Main';
 import './app.scss';
 
 function App() {
