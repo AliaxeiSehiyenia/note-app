@@ -63,6 +63,12 @@ body {
       flex-direction: row;
       gap: 30px;
 
+      &-btns-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
       &-textarea {
         @include wh(80%, 200px);
         padding: 20px;
@@ -75,7 +81,6 @@ body {
     .section-tags {
       @extend %tplFlexFitContent;
       flex-wrap: wrap;
-      border: 2px solid;
       margin: 20px;
 
       .tag {
@@ -85,10 +90,6 @@ body {
         margin: 10px;
         padding: 7px;
         cursor: pointer;
-
-        &.active {
-          border: 2px solid;
-        }
 
         .hash {
           height: inherit;
@@ -182,6 +183,10 @@ body {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     transition-property: box-shadow;
     transition: 0.2s;
+
+    &.active {
+      border: 2px solid;
+    }
 
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
