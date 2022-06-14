@@ -4,10 +4,11 @@ import Note from '../note-list-item/Note';
 type NoteListProps = {
   data: note[];
   onDelete: (id: number) => void;
-  onEdit: (id: number) => void;
+  onSelectEdit: (id: number) => void;
+  idActiveNote: number | null;
 };
 
-const NoteList = ({ data, onDelete, onEdit }: NoteListProps) => {
+const NoteList = ({ data, onDelete, onSelectEdit, idActiveNote }: NoteListProps) => {
   const elements = data.map((item) => {
     const { id, value } = item;
     return (
@@ -15,8 +16,9 @@ const NoteList = ({ data, onDelete, onEdit }: NoteListProps) => {
         key={id}
         id={id}
         note={value}
+        idActiveNote={idActiveNote}
         onDelete={() => onDelete(id)}
-        onEditNote={() => onEdit(id)}
+        onEditNote={() => onSelectEdit(id)}
       />
     );
   });

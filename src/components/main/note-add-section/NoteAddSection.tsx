@@ -4,16 +4,17 @@ import svgSave from '../../../resources/svg/save.svg';
 import type { note } from '../Main';
 
 type NoteAddSectionProps = {
-  onAdd: (note: string) => void;
-  valueActiveNote: note | undefined;
+  onAdd: (valueNote: string) => void;
+  onEdit: (valueNote: string) => void;
+  activeNote: note | undefined;
 };
 
-const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
+const NoteAddSection = ({ onAdd, onEdit, activeNote }: NoteAddSectionProps) => {
   const [currentNoteValue, setCurrentNoteValue] = useState<string | undefined>('');
 
   useEffect(() => {
-    setCurrentNoteValue(valueActiveNote?.value);
-  }, [valueActiveNote]);
+    setCurrentNoteValue(activeNote?.value);
+  }, [activeNote]);
 
   const onValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCurrentNoteValue((e.target as HTMLTextAreaElement).value);
@@ -22,6 +23,13 @@ const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
   const onAddNote = () => {
     if (currentNoteValue) {
       onAdd(currentNoteValue);
+    }
+    setCurrentNoteValue('');
+  };
+
+  const onEditNote = () => {
+    if (currentNoteValue) {
+      onEdit(currentNoteValue);
     }
     setCurrentNoteValue('');
   };
@@ -36,7 +44,7 @@ const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
         onChange={(e) => onValueChange(e)}
       ></textarea>
       <div className="section-creating-btns-wrapper">
-        <button className="btn creating-btn">
+        <button className="btn creating-btn" onClick={onEditNote}>
           <img src={svgSave} alt="add note"></img>
           <span className="tooltiptext">Save note</span>
         </button>

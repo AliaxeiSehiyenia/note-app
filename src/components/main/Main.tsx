@@ -28,35 +28,57 @@ const Main = () => {
   ]);
   const [nextNoteId, setNextNoteId] = useState(5);
   const [nexTagId, setNextTagId] = useState(3);
-  const [activeNote, setActiveNote] = useState<number | null>(null);
+  const [idActiveNote, setIdActiveNote] = useState<number | null>(null);
 
-  const onAddNote = (note: string) => {
+  const onAddNote = (valueNote: string) => {
     const newNote = {
-      value: note,
+      value: valueNote,
       id: nextNoteId + 1,
     };
     setNotes([...notes].concat(newNote));
     setNextNoteId(nextNoteId + 1);
-    console.log(notes);
+  };
+
+  const onEditNote = (valueNote: string) => {
+    if (idActiveNote) {
+      const newEditNote = {
+        value: valueNote,
+        id: idActiveNote,
+      };
+      setNotes(
+        notes.map((item) => {
+          if (item.id === idActiveNote) {
+            item = newEditNote;
+          }
+          return item;
+        })
+      );
+      setIdActiveNote(null);
+    }
   };
 
   const onDeleteNote = (id: number): void => {
     setNotes(notes.filter((item) => item.id !== id));
-    setActiveNote(null);
+    setIdActiveNote(null);
   };
 
-  const onActiveNote = (id: number): void => {
-    setActiveNote(id);
+  const onSelectEditNote = (id: number): void => {
+    setIdActiveNote(id);
   };
 
-  const valueActiveNote = notes.find((item) => item.id === activeNote);
+  const activeNote = notes.find((item) => item.id === idActiveNote);
 
   return (
     <main className="main">
       <div className="container main-container">
-        <NoteAddSection onAdd={onAddNote} valueActiveNote={valueActiveNote} />
+        <NoteAddSection onAdd={onAddNote} onEdit={onEditNote} activeNote={activeNote} />
         <TagList data={tags} />
-        <NoteList data={notes} onDelete={onDeleteNote} onEdit={onActiveNote} />
+        <NoteList
+          data={notes}
+          idActiveNote={idActiveNote}
+          onDelete={onDeleteNote}
+          onSelectEdit={onSelectEditNote}
+        />
       </div>
     </main>
   );
