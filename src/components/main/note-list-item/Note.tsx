@@ -7,7 +7,7 @@ type NoteProps = {
   id: number;
   note: string;
   idActiveNote: number | null;
-  onDelete: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onDelete: () => void;
   onEditNote: () => void;
 };
 
@@ -21,23 +21,10 @@ const Note = ({ id, note, onDelete, onEditNote, idActiveNote }: NoteProps) => {
     }
   }, [idActiveNote]);
 
-  // const focusOnNote = (id: number) => {
-  //   itemRefs.current.forEach((item) => (item as HTMLLIElement).classList.remove('active'));
-  //   if (itemRefs.current[id]) {
-  //     (itemRefs.current[id] as HTMLLIElement).classList.add('active');
-  //   }
-  // };
-
   return (
     <li className="note card" tabIndex={0} ref={(el) => (itemRefs.current[id] = el as never)}>
       <div className="note-btns-wrapper">
-        <button
-          className="btn edit-btn"
-          onClick={() => {
-            onEditNote();
-            // focusOnNote(id);
-          }}
-        >
+        <button className="btn edit-btn" onClick={onEditNote}>
           <img src={svgEdit} alt=""></img>
           <span className="tooltiptext">edit note</span>
         </button>

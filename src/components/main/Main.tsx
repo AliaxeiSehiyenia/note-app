@@ -14,10 +14,10 @@ export type note = {
 };
 
 const Main = () => {
-  const [tags, setTegs] = useState([
-    { value: 'CV', id: 1 },
-    { value: 'LinkedIn', id: 2 },
-    { value: 'React', id: 3 },
+  const [tags, setTags] = useState([
+    { value: 'Создание', id: 1 },
+    { value: 'Фильтр', id: 2 },
+    { value: 'Добавление', id: 3 },
   ]);
   const [notes, setNotes] = useState([
     { value: '1. Создание, редактирование, просмотр и удаление заметок', id: 1 },
@@ -60,7 +60,13 @@ const Main = () => {
 
   const onDeleteNote = (id: number): void => {
     setNotes(notes.filter((item) => item.id !== id));
+    setNextNoteId(nextNoteId - 1);
     setIdActiveNote(null);
+  };
+
+  const onDeleteTag = (id: number): void => {
+    setTags(tags.filter((item) => item.id !== id));
+    setNextTagId(nexTagId - 1);
   };
 
   const onSelectEditNote = (id: number): void => {
@@ -73,7 +79,7 @@ const Main = () => {
     <main className="main">
       <div className="container main-container">
         <NoteAddSection onAdd={onAddNote} onEdit={onEditNote} activeNote={activeNote} />
-        <TagList data={tags} />
+        <TagList data={tags} onDelete={onDeleteTag} />
         <NoteList
           data={notes}
           idActiveNote={idActiveNote}

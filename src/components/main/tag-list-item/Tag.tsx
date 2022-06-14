@@ -5,14 +5,15 @@ type TagProps = {
   key: number;
   id: number;
   tag: string;
+  onDelete: () => void;
 };
 
-const Tag = ({ tag }: TagProps) => {
+const Tag = ({ tag, onDelete }: TagProps) => {
   return (
     <li className="tag card">
       <img className="hash" src={svgHash} alt="hash"></img>
       {tag}
-      <button className="btn tag-btn delete-btn">
+      <button className="btn tag-btn delete-btn" onClick={onDelete}>
         <img src={svgDelete} alt=""></img>
         <span className="tooltiptext">delete tag</span>
       </button>
