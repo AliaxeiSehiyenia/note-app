@@ -13,7 +13,7 @@ const NoteAddSection = ({ onAdd, onEdit, activeNote }: NoteAddSectionProps) => {
   const [currentNoteValue, setCurrentNoteValue] = useState<string | undefined>('');
 
   useEffect(() => {
-    setCurrentNoteValue(activeNote?.value);
+    activeNote ? setCurrentNoteValue(activeNote?.value) : setCurrentNoteValue('');
   }, [activeNote]);
 
   const onValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -27,11 +27,11 @@ const NoteAddSection = ({ onAdd, onEdit, activeNote }: NoteAddSectionProps) => {
     setCurrentNoteValue('');
   };
 
-  const onEditNote = () => {
-    if (currentNoteValue) {
+  const onSaveNote = () => {
+    if (activeNote && currentNoteValue) {
       onEdit(currentNoteValue);
+      setCurrentNoteValue('');
     }
-    setCurrentNoteValue('');
   };
 
   return (
@@ -44,7 +44,7 @@ const NoteAddSection = ({ onAdd, onEdit, activeNote }: NoteAddSectionProps) => {
         onChange={(e) => onValueChange(e)}
       ></textarea>
       <div className="section-creating-btns-wrapper">
-        <button className="btn creating-btn" onClick={onEditNote}>
+        <button className="btn creating-btn" onClick={onSaveNote}>
           <img src={svgSave} alt="add note"></img>
           <span className="tooltiptext">Save note</span>
         </button>
