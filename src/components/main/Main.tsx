@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import NoteAddSection from './note-add-section/NoteAddSection';
 import NoteList from './note-list/NoteList';
-import TagList from './filter-list/FilterList';
+import FilterList from './filter-list/FilterList';
 import { SearchTags } from '../../tools/SearchTags';
 
 export type filter = {
@@ -16,7 +16,7 @@ export type note = {
 };
 
 const Main = () => {
-  const [filters, setFilters] = useState([]);
+  const [filters, setFilters] = useState<filter[] | []>([]);
   const [notes, setNotes] = useState([
     {
       value: '1. #Создание, #редактирование, просмотр и удаление заметок',
@@ -70,9 +70,19 @@ const Main = () => {
     setIdActiveNote(null);
   };
 
+  const onAddFilter = (filter: string) => {
+    if (!filters.find((item) => (item as filter).value === filter)) {
+      const newFilter = {
+        value: filter,
+        id: nexFilterId + 1,
+      };
+      setFilters([...filters].concat(newFilter));
+      setNextFilterId(nexFilterId + 1);
+    }
+  };
+
   const onDeleteFilter = (id: number): void => {
     setFilters(filters.filter((item) => (item as filter).id !== id));
-    setNextFilterId(nexFilterId - 1);
   };
 
   const onSelectEditNote = (id: number): void => {
@@ -85,12 +95,13 @@ const Main = () => {
     <main className="main">
       <div className="container main-container">
         <NoteAddSection onAdd={onAddNote} onEdit={onEditNote} activeNote={activeNote} />
-        <TagList data={filters} onDelete={onDeleteFilter} />
+        <FilterList data={filters} onDelete={onDeleteFilter} />
         <NoteList
           data={notes}
           idActiveNote={idActiveNote}
           onDelete={onDeleteNote}
           onSelectEdit={onSelectEditNote}
+          onAddFilter={onAddFilter}
         />
       </div>
     </main>

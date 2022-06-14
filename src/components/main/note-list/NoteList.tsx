@@ -5,10 +5,11 @@ type noteListProps = {
   data: note[];
   onDelete: (id: number) => void;
   onSelectEdit: (id: number) => void;
+  onAddFilter: (filter: string) => void;
   idActiveNote: number | null;
 };
 
-const NoteList = ({ data, onDelete, onSelectEdit, idActiveNote }: noteListProps) => {
+const NoteList = ({ data, onDelete, onSelectEdit, onAddFilter, idActiveNote }: noteListProps) => {
   const elements = data.map((item) => {
     const { id, value, tags } = item;
     return (
@@ -20,6 +21,7 @@ const NoteList = ({ data, onDelete, onSelectEdit, idActiveNote }: noteListProps)
         idActiveNote={idActiveNote}
         onDelete={() => onDelete(id)}
         onEditNote={() => onSelectEdit(id)}
+        onAddFilter={(filter: string) => onAddFilter(filter)}
       />
     );
   });

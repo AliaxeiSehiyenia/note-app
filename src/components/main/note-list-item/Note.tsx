@@ -11,9 +11,10 @@ type noteProps = {
   tags: string[];
   onDelete: () => void;
   onEditNote: () => void;
+  onAddFilter: (filter: string) => void;
 };
 
-const Note = ({ id, note, onDelete, onEditNote, idActiveNote, tags }: noteProps) => {
+const Note = ({ id, note, onDelete, onEditNote, onAddFilter, idActiveNote, tags }: noteProps) => {
   const itemRefs = useRef([]);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const Note = ({ id, note, onDelete, onEditNote, idActiveNote, tags }: noteProps)
       <ul className="note-tags-list">
         {tags.map((item, i) => {
           return (
-            <li className="note-tag" key={i}>
+            <li className="note-tag" key={i} onClick={() => onAddFilter(item)}>
               <img className="hash" src={svgHash} alt="hash"></img>
               {item}
             </li>
