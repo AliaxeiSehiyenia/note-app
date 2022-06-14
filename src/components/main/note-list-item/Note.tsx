@@ -15,18 +15,18 @@ const Note = ({ id, note, onDelete, onEditNote, idActiveNote }: NoteProps) => {
   const itemRefs = useRef([]);
 
   useEffect(() => {
-    if (!idActiveNote) {
-      console.log(idActiveNote);
-      (itemRefs.current[id] as HTMLLIElement).classList.remove('active');
+    itemRefs.current.forEach((item) => (item as HTMLLIElement).classList.remove('active'));
+    if (itemRefs.current[idActiveNote as number]) {
+      (itemRefs.current[idActiveNote as number] as HTMLLIElement).classList.add('active');
     }
   }, [idActiveNote]);
 
-  const focusOnNote = (id: number) => {
-    if (itemRefs.current[id]) {
-      (itemRefs.current[id] as HTMLLIElement).classList.add('active');
-      (itemRefs.current[id] as HTMLLIElement).focus();
-    }
-  };
+  // const focusOnNote = (id: number) => {
+  //   itemRefs.current.forEach((item) => (item as HTMLLIElement).classList.remove('active'));
+  //   if (itemRefs.current[id]) {
+  //     (itemRefs.current[id] as HTMLLIElement).classList.add('active');
+  //   }
+  // };
 
   return (
     <li className="note card" tabIndex={0} ref={(el) => (itemRefs.current[id] = el as never)}>
@@ -35,7 +35,7 @@ const Note = ({ id, note, onDelete, onEditNote, idActiveNote }: NoteProps) => {
           className="btn edit-btn"
           onClick={() => {
             onEditNote();
-            focusOnNote(id);
+            // focusOnNote(id);
           }}
         >
           <img src={svgEdit} alt=""></img>

@@ -37,6 +37,7 @@ const Main = () => {
     };
     setNotes([...notes].concat(newNote));
     setNextNoteId(nextNoteId + 1);
+    setIdActiveNote(null);
   };
 
   const onEditNote = (valueNote: string) => {
