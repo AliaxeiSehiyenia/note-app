@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import NoteAddSection from './note-add-section/NoteAddSection';
 import NoteList from './note-list/NoteList';
-import TagList from './tag-list/TagList';
+import TagList from './filter-list/FilterList';
 
-export type tag = {
+export type filter = {
   value: string;
   id: number;
 };
@@ -11,29 +11,33 @@ export type tag = {
 export type note = {
   value: string;
   id: number;
+  tags: string[];
 };
 
 const Main = () => {
-  const [tags, setTags] = useState([
-    { value: 'Создание', id: 1 },
-    { value: 'Фильтр', id: 2 },
-    { value: 'Добавление', id: 3 },
-  ]);
+  const [filters, setFilters] = useState([]);
   const [notes, setNotes] = useState([
-    { value: '1. Создание, редактирование, просмотр и удаление заметок', id: 1 },
-    { value: '2. Фильтр заметок по тегу', id: 2 },
-    { value: '3. Добавление и удаление тегов из списка.', id: 3 },
-    { value: '4. Данные хранить в json- файле.', id: 4 },
-    { value: '5. Использование CSS препроцессора.', id: 5 },
+    {
+      value: '1. #Создание, #редактирование, просмотр и удаление заметок',
+      id: 1,
+      tags: ['Создание', 'редактирование'],
+    },
+    { value: '2. #Фильтр заметок по тегу', id: 2, tags: ['Фильтр'] },
+    {
+      value: '3. #Добавление и #удаление #тегов из списка.',
+      id: 3,
+      tags: ['Добавление', 'удаление', 'тегов'],
+    },
   ]);
-  const [nextNoteId, setNextNoteId] = useState(5);
-  const [nexTagId, setNextTagId] = useState(3);
+  const [nextNoteId, setNextNoteId] = useState(3);
+  const [nexFilterId, setNextFilterId] = useState(0);
   const [idActiveNote, setIdActiveNote] = useState<number | null>(null);
 
   const onAddNote = (valueNote: string) => {
     const newNote = {
       value: valueNote,
       id: nextNoteId + 1,
+      tags: [],
     };
     setNotes([...notes].concat(newNote));
     setNextNoteId(nextNoteId + 1);
@@ -45,6 +49,7 @@ const Main = () => {
       const newEditNote = {
         value: valueNote,
         id: idActiveNote,
+        tags: [...notes[idActiveNote].tags],
       };
       setNotes(
         notes.map((item) => {
@@ -64,9 +69,9 @@ const Main = () => {
     setIdActiveNote(null);
   };
 
-  const onDeleteTag = (id: number): void => {
-    setTags(tags.filter((item) => item.id !== id));
-    setNextTagId(nexTagId - 1);
+  const onDeleteFilter = (id: number): void => {
+    setFilters(filters.filter((item) => (item as filter).id !== id));
+    setNextFilterId(nexFilterId - 1);
   };
 
   const onSelectEditNote = (id: number): void => {
@@ -79,7 +84,7 @@ const Main = () => {
     <main className="main">
       <div className="container main-container">
         <NoteAddSection onAdd={onAddNote} onEdit={onEditNote} activeNote={activeNote} />
-        <TagList data={tags} onDelete={onDeleteTag} />
+        <TagList data={filters} onDelete={onDeleteFilter} />
         <NoteList
           data={notes}
           idActiveNote={idActiveNote}

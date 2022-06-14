@@ -81,20 +81,18 @@ body {
       }
     }
 
-    .section-tags,
-    .tags-list {
+    .section-filters,
+    .filters-list,
+    .note-tags-list {
       @extend %tplFlexFitContent;
       flex-wrap: wrap;
 
-      .tags-list {
-        margin: 20px;
-      }
-
-      .tag {
+      .filter-tag,
+      .note-tag {
         @extend %tplFlexCenter;
         height: 30px;
         flex-direction: row;
-        margin: 10px;
+        margin: 10px 0;
         padding: 7px;
         cursor: pointer;
 
@@ -102,6 +100,25 @@ body {
           height: inherit;
         }
       }
+
+      .note-tag {
+        margin: 10px 10px 0 0;
+        padding: 0;
+
+        &:hover {
+          text-decoration: underline;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .filters-list {
+      margin: 20px;
+      gap: 20px;
+    }
+
+    .note-tags-list {
+      border-top: 1px solid;
     }
 
     .section-notes,
@@ -160,7 +177,7 @@ body {
       transform: translate(-50%, 120%);
     }
 
-    &.tag-btn {
+    &.filter-btn {
       @include wh(30px, 20px);
       margin-left: 10px;
     }

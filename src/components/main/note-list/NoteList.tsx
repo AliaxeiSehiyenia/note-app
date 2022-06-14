@@ -1,21 +1,22 @@
 import type { note } from '../Main';
 import Note from '../note-list-item/Note';
 
-type NoteListProps = {
+type noteListProps = {
   data: note[];
   onDelete: (id: number) => void;
   onSelectEdit: (id: number) => void;
   idActiveNote: number | null;
 };
 
-const NoteList = ({ data, onDelete, onSelectEdit, idActiveNote }: NoteListProps) => {
+const NoteList = ({ data, onDelete, onSelectEdit, idActiveNote }: noteListProps) => {
   const elements = data.map((item) => {
-    const { id, value } = item;
+    const { id, value, tags } = item;
     return (
       <Note
         key={id}
         id={id}
         note={value}
+        tags={tags}
         idActiveNote={idActiveNote}
         onDelete={() => onDelete(id)}
         onEditNote={() => onSelectEdit(id)}

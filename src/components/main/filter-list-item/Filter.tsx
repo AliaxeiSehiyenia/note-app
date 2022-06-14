@@ -4,21 +4,21 @@ import svgHash from '../../../resources/svg/hash.svg';
 type TagProps = {
   key: number;
   id: number;
-  tag: string;
+  value: string;
   onDelete: () => void;
 };
 
-const Tag = ({ tag, onDelete }: TagProps) => {
+const Filter = ({ value, onDelete }: TagProps) => {
   return (
-    <li className="tag card">
+    <li className="filter-tag card">
       <img className="hash" src={svgHash} alt="hash"></img>
-      {tag}
-      <button className="btn tag-btn delete-btn" onClick={onDelete}>
-        <img src={svgDelete} alt=""></img>
+      {value}
+      <button className="btn filter-btn delete-btn" onClick={onDelete}>
+        <img src={svgDelete} alt="delete"></img>
         <span className="tooltiptext">delete tag</span>
       </button>
     </li>
   );
 };
 
-export default Tag;
+export default Filter;

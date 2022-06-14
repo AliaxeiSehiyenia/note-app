@@ -1,17 +1,19 @@
 import { useEffect, useRef } from 'react';
 import svgDelete from '../../../resources/svg/delete.svg';
 import svgEdit from '../../../resources/svg/edit.svg';
+import svgHash from '../../../resources/svg/hash.svg';
 
-type NoteProps = {
+type noteProps = {
   key: number;
   id: number;
   note: string;
   idActiveNote: number | null;
+  tags: string[];
   onDelete: () => void;
   onEditNote: () => void;
 };
 
-const Note = ({ id, note, onDelete, onEditNote, idActiveNote }: NoteProps) => {
+const Note = ({ id, note, onDelete, onEditNote, idActiveNote, tags }: noteProps) => {
   const itemRefs = useRef([]);
 
   useEffect(() => {
@@ -34,6 +36,17 @@ const Note = ({ id, note, onDelete, onEditNote, idActiveNote }: NoteProps) => {
         </button>
       </div>
       {note}
+
+      <ul className="note-tags-list">
+        {tags.map((item, i) => {
+          return (
+            <li className="note-tag" key={i}>
+              <img className="hash" src={svgHash} alt="hash"></img>
+              {item}
+            </li>
+          );
+        })}
+      </ul>
     </li>
   );
 };
