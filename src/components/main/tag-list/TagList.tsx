@@ -1,12 +1,14 @@
+import type { tag } from '../Main';
 import Tag from '../tag-list-item/Tag';
 
 type TagListProps = {
-  data: string[];
+  data: tag[];
 };
 
 const TagList = ({ data }: TagListProps) => {
-  const elements = data.map((item, i) => {
-    return <Tag key={i} tag={item} />;
+  const elements = data.map((item) => {
+    const { value, id } = item;
+    return <Tag key={id} id={id} tag={value} />;
   });
 
   return (

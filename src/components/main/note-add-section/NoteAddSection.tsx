@@ -1,28 +1,29 @@
 import { useEffect, useState } from 'react';
 import svgPlus from '../../../resources/svg/plus.svg';
 import svgSave from '../../../resources/svg/save.svg';
+import type { note } from '../Main';
 
 type NoteAddSectionProps = {
   onAdd: (note: string) => void;
-  valueActiveNote: string | undefined;
+  valueActiveNote: note | undefined;
 };
 
 const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
-  const [currentNote, setCurrentNote] = useState<string | undefined>('');
+  const [currentNoteValue, setCurrentNoteValue] = useState<string | undefined>('');
 
   useEffect(() => {
-    setCurrentNote(valueActiveNote);
+    setCurrentNoteValue(valueActiveNote?.value);
   }, [valueActiveNote]);
 
   const onValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCurrentNote((e.target as HTMLTextAreaElement).value);
+    setCurrentNoteValue((e.target as HTMLTextAreaElement).value);
   };
 
   const onAddNote = () => {
-    if (currentNote) {
-      onAdd(currentNote);
+    if (currentNoteValue) {
+      onAdd(currentNoteValue);
     }
-    setCurrentNote('');
+    setCurrentNoteValue('');
   };
 
   return (
@@ -31,7 +32,7 @@ const NoteAddSection = ({ onAdd, valueActiveNote }: NoteAddSectionProps) => {
         className="section-creating-textarea"
         autoComplete="off"
         placeholder="Enter note..."
-        value={currentNote}
+        value={currentNoteValue}
         onChange={(e) => onValueChange(e)}
       ></textarea>
       <div className="section-creating-btns-wrapper">

@@ -3,6 +3,7 @@ import svgHash from '../../../resources/svg/hash.svg';
 
 type TagProps = {
   key: number;
+  id: number;
   tag: string;
 };
 

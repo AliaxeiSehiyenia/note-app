@@ -3,23 +3,45 @@ import NoteAddSection from './note-add-section/NoteAddSection';
 import NoteList from './note-list/NoteList';
 import TagList from './tag-list/TagList';
 
+export type tag = {
+  value: string;
+  id: number;
+};
+
+export type note = {
+  value: string;
+  id: number;
+};
+
 const Main = () => {
-  const [data, setData] = useState({
-    tags: ['CV', 'LinkedIn', 'React'],
-    notes: [
-      'Залить на гит',
-      'Добрый день, Алексей Михайлович. Спасибо, за отклик.Предлагаю Вам выполнить тестовое задание.',
-      'Тестовое задание Front-end.',
-    ],
-  });
+  const [tags, setTegs] = useState([
+    { value: 'CV', id: 1 },
+    { value: 'LinkedIn', id: 2 },
+    { value: 'React', id: 3 },
+  ]);
+  const [notes, setNotes] = useState([
+    { value: '1. Создание, редактирование, просмотр и удаление заметок', id: 1 },
+    { value: '2. Фильтр заметок по тегу', id: 2 },
+    { value: '3. Добавление и удаление тегов из списка.', id: 3 },
+    { value: '4. Данные хранить в json- файле.', id: 4 },
+    { value: '5. Использование CSS препроцессора.', id: 5 },
+  ]);
+  const [nextNoteId, setNextNoteId] = useState(5);
+  const [nexTagId, setNextTagId] = useState(3);
   const [activeNote, setActiveNote] = useState<number | null>(null);
 
   const onAddNote = (note: string) => {
-    setData({ tags: [...tags], notes: [...notes].concat(note) });
+    const newNote = {
+      value: note,
+      id: nextNoteId + 1,
+    };
+    setNotes([...notes].concat(newNote));
+    setNextNoteId(nextNoteId + 1);
+    console.log(notes);
   };
 
   const onDeleteNote = (id: number): void => {
-    setData({ tags: [...tags], notes: notes.filter((item) => notes.indexOf(item) !== id) });
+    setNotes(notes.filter((item) => item.id !== id));
     setActiveNote(null);
   };
 
@@ -27,8 +49,7 @@ const Main = () => {
     setActiveNote(id);
   };
 
-  const { tags, notes } = data;
-  const valueActiveNote = notes.find((item) => notes.indexOf(item) === activeNote);
+  const valueActiveNote = notes.find((item) => item.id === activeNote);
 
   return (
     <main className="main">

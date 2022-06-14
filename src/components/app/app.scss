@@ -5,6 +5,7 @@ $color_green: #4CAF50;
 $color_red: rgb(168, 46, 46);
 $color_black: #000000;
 $color_gray: rgb(117, 104, 99);
+$color_footer: #f48c90;
 
 %tplFlexCenter {
   display: flex;
@@ -31,7 +32,6 @@ $color_gray: rgb(117, 104, 99);
 html,
 body {
   height: 100%;
-  background-image: url('../../resources/img/background.png');
 
   #root {
     display: flex;
@@ -40,6 +40,9 @@ body {
 
     .app-content {
       flex: 1 0 auto;
+      background-image: url('../../resources/img/background.png');
+      background-position: center;
+      background-size: cover;
     }
   }
 }
@@ -208,6 +211,7 @@ body {
   border-top: 2px solid;
   border-image-slice: 1;
   border-image-source: linear-gradient(to left, #38495a, #a2abb3, #38495a);
+  background-color: $color_footer;
 
   &-container {
     @extend %tplFlexCenter;

@@ -1,15 +1,23 @@
+import type { note } from '../Main';
 import Note from '../note-list-item/Note';
 
 type NoteListProps = {
-  data: string[];
+  data: note[];
   onDelete: (id: number) => void;
   onEdit: (id: number) => void;
 };
 
 const NoteList = ({ data, onDelete, onEdit }: NoteListProps) => {
-  const elements = data.map((item, i) => {
+  const elements = data.map((item) => {
+    const { id, value } = item;
     return (
-      <Note key={i} id={i} note={item} onDelete={() => onDelete(i)} onEditNote={() => onEdit(i)} />
+      <Note
+        key={id}
+        id={id}
+        note={value}
+        onDelete={() => onDelete(id)}
+        onEditNote={() => onEdit(id)}
+      />
     );
   });
 
