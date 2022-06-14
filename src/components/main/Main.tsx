@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NoteAddSection from './note-add-section/NoteAddSection';
 import NoteList from './note-list/NoteList';
 import TagList from './filter-list/FilterList';
+import { SearchTags } from '../../tools/SearchTags';
 
 export type filter = {
   value: string;
@@ -37,7 +38,7 @@ const Main = () => {
     const newNote = {
       value: valueNote,
       id: nextNoteId + 1,
-      tags: [],
+      tags: SearchTags(valueNote) || [],
     };
     setNotes([...notes].concat(newNote));
     setNextNoteId(nextNoteId + 1);
@@ -49,7 +50,7 @@ const Main = () => {
       const newEditNote = {
         value: valueNote,
         id: idActiveNote,
-        tags: [...notes[idActiveNote].tags],
+        tags: SearchTags(valueNote) || [],
       };
       setNotes(
         notes.map((item) => {
