@@ -25,9 +25,9 @@ const Main = () => {
     },
     { value: '2. #Фильтр заметок по тегу', id: 2, tags: ['Фильтр'] },
     {
-      value: '3. #Добавление и #удаление #тегов из списка.',
+      value: '3. #Создание и #удаление #тегов из списка.',
       id: 3,
-      tags: ['Добавление', 'удаление', 'тегов'],
+      tags: ['Создание', 'удаление', 'тегов'],
     },
   ]);
   const [nextNoteId, setNextNoteId] = useState(3);
@@ -89,6 +89,14 @@ const Main = () => {
     setIdActiveNote(id);
   };
 
+  const filtersPost = (tags: string[]) => {
+    for (let i = 0; i < filters.length; i++) {
+      if (tags.indexOf(filters[i].value) == -1) return false;
+    }
+    return true;
+  };
+
+  const visibleNotes = filters.length !== 0 ? notes.filter(({ tags }) => filtersPost(tags)) : notes;
   const activeNote = notes.find((item) => item.id === idActiveNote);
 
   return (
@@ -97,7 +105,7 @@ const Main = () => {
         <NoteAddSection onAdd={onAddNote} onEdit={onEditNote} activeNote={activeNote} />
         <FilterList data={filters} onDelete={onDeleteFilter} />
         <NoteList
-          data={notes}
+          data={visibleNotes}
           idActiveNote={idActiveNote}
           onDelete={onDeleteNote}
           onSelectEdit={onSelectEditNote}
