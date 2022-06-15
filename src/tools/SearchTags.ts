@@ -13,8 +13,5 @@ export function SearchTags(str: string) {
         }
       });
   }
-  if (str.indexOf('#') !== 0) {
-    arrTags.shift();
-  }
   return arrTags;
 }
