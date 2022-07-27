@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+Деплой приложения:
+======
+[https://note-app-aliaksei-serhiyenia.netlify.app/](https://note-app-aliaksei-serhiyenia.netlify.app/)
+    
+Библиотеки, фреймворки, технологии, которые были задействованы в процессе разработки приложения. Их преимущества и недостатки.
+======
+## React
+  
+React уже зарекомендовал себя в качестве мощного инструмента для создания пользовательских интерфейсов. Пользовательский интерфейс (UI)  —  одна из важнейших частей веб-приложения, ведь это то, что пользователь видит, с чем он взаимодействует.
+  
+##### Среди достоинств React можно выделить следующее:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Виртуальная объектная модель документа.
+* Эффективность
+* Высокая производительность
+2. Повторное применение компонентов.
+3. Нисходящий поток данных.
+4. Огромное сообщество.
+5. Браузерные инструменты React-разработчика.
+  
+##### В тоже время недостатками React являются:
 
-## Available Scripts
+1. Плохая документация.
+2. Запутанный синтаксис JSX.
+3. Сложность поисковой оптимизации.
+4. Фокусировка на пользовательском интерфейсе.
+  
+## TypeScript
+  
+TypeScript — это язык программирования, в котором исправлены многие недостатки JavaScript.
+  
+##### Среди достоинств TypeScript можно выделить следующее:
 
-In the project directory, you can run:
+1. Типизация.
+2. Поддержка новейших функций JavaScript.
+3. Поддержка IDE.
+4. Совместимость с браузером.
+  
+##### В тоже время недостатками TypeScript являются:
 
-### `npm start`
+1. Снижает скорость разработки.
+2. Тяжелее поддерживать.
+3. Требует компиляции.
+4. Ложное ощущение безопасности.
+5. Повышает порог входа.
+  
+## React Hooks
+  
+Хуки - это функции, с помощью которых вы можете «подцепиться» к состоянию и методам жизненного цикла React из функциональных компонентов.
+  
+##### Среди достоинств React Hooks можно выделить следующее:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Легче шарить логику состояния(кастомные хуки).
+2. Избавление от НОС и wrapper-hell.
+3. Эффективние минимизация(ну нужно сохранять имена методов, не надо работать с прототипами).
+4. Не нужно помнить о this.
+5. Упрощение логики, связанной с жизненным циклом.
+6. Гибче возможности оптимизации за счет мемоизации.
+  
+##### В тоже время недостатками React Hooks являются:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Нельзя использовать в компонентах на классах.
+2. Нельзя вызывать внутри условий, циклов, вложенных функций.
